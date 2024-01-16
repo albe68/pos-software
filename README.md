@@ -9,14 +9,24 @@ Make sure you have the following installed in your system:
 - [Git](https://git-scm.com/)
 - [npm](https://www.npmjs.com/)
 
+
 ## Getting Started
 
 - Create a fork of the repo
-- Clone your forked repo locally `git clone <repo_link>`
-- Start the server guide
-  `cd server`
-<!-- - Run `cp .env.example .env.local` and set up env variables -->
-- 
+- Clone your forked repo locally `git clone https://github.com/albe68/pos-software.git`
+- Create a `.env` file in server's directory and copy the `.env.example` file to `.env`:  
+  or use following command in bash.
+```bash
+ cp.env.example .env
+```
+- Start the server guide : 
+1.`cd server`
+2. `npm run dev`
+
+
+- Start the client guide :
+1. `cd client`
+2. `npm run dev`
 
 
 ### Documentation
