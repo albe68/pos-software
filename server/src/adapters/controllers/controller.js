@@ -1,8 +1,7 @@
 import express from "express";
 const app = express();
 import { connection } from "../../frameworks/database/connection.js";
-//app doesnt working if directly implemented in to this function
-
+//To DO:
 //remove items from cart
 //search products
 const route = (app) => {
@@ -19,7 +18,6 @@ const route = (app) => {
     });
   });
   app.get("/", (req, res) => {
-    console.log(`hhh`);
     const insert = `SELECT * FROM test.products;`;
     connection.query(insert, async (ins_err, result) => {
       if (ins_err) {
@@ -41,16 +39,17 @@ const route = (app) => {
     // function getOffersFromDB() {
     //   //fetch offers from db
     // }
-
+    
     const cal_dis = () => {
-      const prctg = `SELECT dis_type FROM test.products;`;
-      connection.query(prctg, async (aoc_err, result) => {
+      const products_query = `SELECT * FROM test.products;`;
+      connection.query(products_query, async (aoc_err, result) => {
         if (aoc_err) {
           console.log("error", aoc_err);
         } else {
-          const disType = result.map((row) => row.dis_type);
-          console.log(`Result`, disType);
-          //  Result [ 'prctg', 'flat', 'bogo' ]
+          console.log(`hahaha`,result)
+          // const products_table = result.map((row) => {
+          //   return row;
+          // });
         }
       });
     };
@@ -90,3 +89,23 @@ const route = (app) => {
 };
 
 export default route;
+
+function calculate_percent_dis(og_price, dis_prcnt) {
+  console.log(`py`, og_price, `py`, dis_prcnt);
+  const disAmount = (dis_prcnt / 100) * og_price;
+  const discountedLastPrice = og_price - disAmount;
+  return { discountAmount: disAmount, discountPrice: discountedLastPrice };
+}
+// const og_pc = 100;
+// const dis_prcnt = 30;
+// const result = calculate_percent_dis(og_pc, dis_prcnt);
+// console.log(
+//   `how much discounted`,
+//   result.discountAmount,
+//   `discountedLastPrice`,
+//   result.discountPrice
+// );
+
+// const cal_flat = (og_price, flat_amount) => og_price - flat_amount;
+// const finalPrice = cal_flat(100, 50);
+// console.log(`g`, finalPrice);
