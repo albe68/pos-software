@@ -13,14 +13,14 @@ Make sure you have the following installed in your system:
 ## Getting Started
 
 - Create a fork of the repo
-- Clone your forked repo locally 
+- Clone your forked repo locally using `bash command below`
 ```bash
- git clone https://github.com/albe68/pos-software.git 
+ $ git clone https://github.com/albe68/pos-software.git 
 ```
 - Create a `.env` file in server's directory and copy the `.env.example` file to `.env`:  
   or use following command in bash.
 ```bash
- cp.env.example .env
+ $ cp.env.example .env
 ```
 - Start the server guide : 
 
