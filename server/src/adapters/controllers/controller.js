@@ -1,10 +1,15 @@
 import express from "express";
 const app = express();
 import { connection } from "../../frameworks/database/connection.js";
-//To DO:
-//remove items from cart
-//search products
+
+/**
+ * 
+ * @param  app- Dependency injection of express app object
+ * 
+**/
+ 
 const route = (app) => {
+
   app.post("/add-products", (req, res) => {
     const cmd = `CREATE TABLE IF NOT EXISTS users (id INT AUTO_INCREMENT PRIMARY KEY,username VARCHAR(200) NOT NULL)`;
     connection.query(cmd, (err, results) => {
@@ -12,8 +17,6 @@ const route = (app) => {
         console.error(`error creating table`, err);
         return;
       }
-      console.log(`first`);
-
       const user_val = `jogn`;
     });
   });
@@ -35,18 +38,13 @@ const route = (app) => {
 
   app.post("/add-to-cart/:id", (req, res) => {
     const pro_id = req.params.id;
-    // const applicableOffers = getApplicableOffers();
-    // function getOffersFromDB() {
-    //   //fetch offers from db
-    // }
-    
+
     const cal_dis = () => {
       const products_query = `SELECT * FROM test.products;`;
       connection.query(products_query, async (aoc_err, result) => {
         if (aoc_err) {
           console.log("error", aoc_err);
         } else {
-          console.log(`hahaha`,result)
           // const products_table = result.map((row) => {
           //   return row;
           // });
@@ -56,19 +54,19 @@ const route = (app) => {
 
     cal_dis();
 
-    // const AOC = `INSERT INTO cart (idcart,cart_items) VALUES(${pro_id},1)`;
+    const AOC = `INSERT INTO cart (idcart,cart_items) VALUES(${pro_id},1)`;
 
-    // connection.query(AOC, async (aoc_err, result) => {
-    //   if (aoc_err) {
-    //     res.status(500).json({
-    //       error: "Internal server error",
-    //     });
-    //   } else {
-    //     res.status(200).json({
-    //       sucesss: "added to cart",
-    //     });
-    //   }
-    // });
+    connection.query(AOC, async (aoc_err, result) => {
+      if (aoc_err) {
+        res.status(500).json({
+          error: "Internal server error",
+        });
+      } else {
+        res.status(200).json({
+          sucesss: "added to cart",
+        });
+      }
+    });
   });
 
   app.get("/cart-items", (req, res) => {
@@ -91,7 +89,6 @@ const route = (app) => {
 export default route;
 
 function calculate_percent_dis(og_price, dis_prcnt) {
-  console.log(`py`, og_price, `py`, dis_prcnt);
   const disAmount = (dis_prcnt / 100) * og_price;
   const discountedLastPrice = og_price - disAmount;
   return { discountAmount: disAmount, discountPrice: discountedLastPrice };
@@ -106,6 +103,5 @@ function calculate_percent_dis(og_price, dis_prcnt) {
 //   result.discountPrice
 // );
 
-// const cal_flat = (og_price, flat_amount) => og_price - flat_amount;
-// const finalPrice = cal_flat(100, 50);
-// console.log(`g`, finalPrice);
+const cal_flat = (og_price, flat_amount) => og_price - flat_amount;
+const finalPrice = cal_flat(100, 50);

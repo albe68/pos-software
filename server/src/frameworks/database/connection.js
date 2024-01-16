@@ -1,6 +1,6 @@
 import { createConnection } from "mysql2";
 import "dotenv/config";
-const password=process.env.PASSWORD;
+const password = process.env.PASSWORD;
 export const connection = createConnection({
   host: "localhost",
   port: "3306",
@@ -10,7 +10,6 @@ export const connection = createConnection({
 });
 
 const dbConnection = () => {
-
   connection.connect((err) => {
     if (err) {
       console.log(`${err}`);
