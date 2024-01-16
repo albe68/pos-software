@@ -13,7 +13,8 @@ Make sure you have the following installed in your system:
 ## Getting Started
 
 - Create a fork of the repo
-- Clone your forked repo locally using `bash command below`
+- Clone your forked repo locally using `$` represents bash command.
+
 ```bash
  $ git clone https://github.com/albe68/pos-software.git 
 ```
